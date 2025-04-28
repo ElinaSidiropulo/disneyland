@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- JDBC настройки -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/disney</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">4002</property>
+
+        <!-- Конфигурация пула соединений HikariCP -->
+        <property name="hibernate.hikari.minimumIdle">2</property>
+        <property name="hibernate.hikari.maximumPoolSize">10</property>
+        <property name="hibernate.hikari.idleTimeout">30000</property>
+
+        <!-- Автоматическое создание таблиц (только для разработки) -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Логирование SQL-запросов -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Аннотации JPA -->
+        <property name="hibernate.current_session_context_class">thread</property>
+
+        <!-- Указываем классы сущностей -->
+        <mapping class="org.example.entity.User"/>
+        <mapping class="org.example.entity.Ticket"/>
+        <mapping class="org.example.entity.Attraction"/>
+        <mapping class="org.example.entity.Booking"/>
+        <mapping class="org.example.entity.Review"/>
+        <mapping class="org.example.entity.Visit"/>
+        <mapping class="org.example.entity.Schedule"/>
+
+
+    </session-factory>
+</hibernate-configuration>

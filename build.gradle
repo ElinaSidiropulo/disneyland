@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Hibernate зависимости для работы с базой данных
+    implementation 'org.hibernate.orm:hibernate-core:6.4.4.Final'
+    implementation 'com.zaxxer:HikariCP:5.1.0' // Пул соединений HikariCP
+    implementation 'org.postgresql:postgresql:42.7.3' // PostgreSQL драйвер
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0' // JPA API
+
+    // Добавление JAXB
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+    runtimeOnly 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
+
+    // Логирование с использованием Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+
+    // Spring Boot зависимости
+    implementation 'org.springframework.boot:spring-boot-starter-web' // Для веб-приложения
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // Для тестирования
+}
+
+application {
+    mainClass = 'org.example.Main' // Укажите правильный путь к вашему main классу
+}
