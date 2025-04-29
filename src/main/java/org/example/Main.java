@@ -45,36 +45,36 @@
 //        HibernateUtil.shutdown();
 //    }
 //}
+//
+//
+package org.example;
 
+import org.example.dao.UserDao;
+import org.example.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//package org.example;
-//
-//import org.example.dao.UserDao;
-//import org.example.entity.User;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-//
-//public class Main {
-//    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-//
-//    public static void main(String[] args) {
-//        UserDao userDao = new UserDao();
-//
-//        try {
-//            User user = new User();
-//            user.setName("pppppoofy");
-//            user.setEmail("pppppoofy@example.com");
-//
-//            userDao.saveUser(user);
-//            logger.info("Пользователь успешно сохранен: {}", user);
-//
-//            userDao.getAllUsers().forEach(u -> logger.info("Найден пользователь: {}", u));
-//        } catch (Exception e) {
-//            logger.error("Ошибка в основном методе Main: ", e);
-//        }
-//    }
-//}
-//
+public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
+    public static void main(String[] args) {
+        UserDao userDao = new UserDao();
+
+        try {
+            User user = new User();
+            user.setName("auffy");
+            user.setEmail("auffy@example.com");
+
+            userDao.saveUser(user);
+            logger.info("Пользователь успешно сохранен: {}", user);
+
+            userDao.getAllUsers().forEach(u -> logger.info("Найден пользователь: {}", u));
+        } catch (Exception e) {
+            logger.error("Ошибка в основном методе Main: ", e);
+        }
+    }
+}
+
 //package org.example;
 //
 //import org.example.dao.AttractionDao;
@@ -90,7 +90,7 @@
 //
 //        // Создаем новый аттракцион
 //        Attraction attraction = new Attraction();
-//        attraction.setName("Американские горкиииии");
+//        attraction.setName("Американские горкиАААА");
 //        attraction.setDescription("Захватывающие американские горки с крутыми спусками!");
 //        attraction.setMinHeight(120);
 //        attraction.setMaxCapacity(20);
@@ -191,7 +191,7 @@
 //            review.setUser(user);
 //            review.setAttraction(attraction);
 //            review.setRating(5);
-//            review.setComment("Блин я падаю блин");
+//            review.setComment("Блин яЯЯЯя падаю блин");
 //
 //            // Сохранение отзыва
 //            reviewDao.saveReview(review);
@@ -208,6 +208,7 @@
 //        }
 //    }
 //}
+
 //package org.example;
 //
 //import org.example.dao.VisitDao;
@@ -253,47 +254,48 @@
 //        }
 //    }
 //}
-package org.example;
 
-import org.example.dao.ScheduleDao;
-import org.example.entity.Attraction;
-import org.example.entity.Schedule;
-import org.example.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import java.time.LocalTime;
-
-public class Main {
-    public static void main(String[] args) {
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        ScheduleDao scheduleDao = new ScheduleDao();
-
-        // Открываем сессию для загрузки Attraction
-        Attraction attraction;
-        try (Session session = sessionFactory.openSession()) {
-            attraction = session.get(Attraction.class, 1L); // Загружаем Attraction с id = 1
-        }
-
-        if (attraction == null) {
-            System.err.println("Ошибка: Аттракцион с id = 1 не найден.");
-            return;
-        }
-
-        // Создаем и сохраняем расписание
-        Schedule schedule = new Schedule();
-        schedule.setAttraction(attraction); // Устанавливаем аттракцион
-        schedule.setDayOfWeek("Tuesday");
-        schedule.setOpenTime(LocalTime.of(10, 0));
-        schedule.setCloseTime(LocalTime.of(18, 0));
-        scheduleDao.saveSchedule(schedule);
-
-        // Получаем и выводим все расписания
-        System.out.println("Все расписания:");
-        scheduleDao.getAllSchedules().forEach(System.out::println);
-
-        // Получаем расписание по ID
-        Schedule retrievedSchedule = scheduleDao.getScheduleById(schedule.getId());
-        System.out.println("Найденное расписание: " + retrievedSchedule);
-    }
-}
+//package org.example;
+//
+//import org.example.dao.ScheduleDao;
+//import org.example.entity.Attraction;
+//import org.example.entity.Schedule;
+//import org.example.util.HibernateUtil;
+//import org.hibernate.Session;
+//import org.hibernate.SessionFactory;
+//
+//import java.time.LocalTime;
+//
+//public class Main {
+//    public static void main(String[] args) {
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        ScheduleDao scheduleDao = new ScheduleDao();
+//
+//        // Открываем сессию для загрузки Attraction
+//        Attraction attraction;
+//        try (Session session = sessionFactory.openSession()) {
+//            attraction = session.get(Attraction.class, 1L); // Загружаем Attraction с id = 1
+//        }
+//
+//        if (attraction == null) {
+//            System.err.println("Ошибка: Аттракцион с id = 1 не найден.");
+//            return;
+//        }
+//
+//        // Создаем и сохраняем расписание
+//        Schedule schedule = new Schedule();
+//        schedule.setAttraction(attraction); // Устанавливаем аттракцион
+//        schedule.setDayOfWeek("Thursday");
+//        schedule.setOpenTime(LocalTime.of(10, 0));
+//        schedule.setCloseTime(LocalTime.of(18, 0));
+//        scheduleDao.saveSchedule(schedule);
+//
+//        // Получаем и выводим все расписания
+//        System.out.println("Все расписания:");
+//        scheduleDao.getAllSchedules().forEach(System.out::println);
+//
+//        // Получаем расписание по ID
+//        Schedule retrievedSchedule = scheduleDao.getScheduleById(schedule.getId());
+//        System.out.println("Найденное расписание: " + retrievedSchedule);
+//    }
+//}

@@ -1,6 +1,11 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import org.example.entity.Attraction;
+import org.example.entity.Ticket;
+import org.example.entity.User;
+import org.example.entity.VisitId;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,9 +25,6 @@ public class Visit {
     @JoinColumn(name = "attraction_id", nullable = false)
     private Attraction attraction;
 
-    @Column(name = "visit_time", nullable = false)
-    private LocalDateTime visitTime;
-
     @ManyToOne
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
@@ -34,7 +36,6 @@ public class Visit {
         this.id = id;
         this.user = user;
         this.attraction = attraction;
-        this.visitTime = id.getVisitTime();
     }
 
     // Оставляем существующий конструктор
@@ -42,7 +43,6 @@ public class Visit {
         this.id = new VisitId(user.getId(), attraction.getId(), visitTime);
         this.user = user;
         this.attraction = attraction;
-        this.visitTime = visitTime;
         this.ticket = ticket;
     }
 
@@ -70,12 +70,9 @@ public class Visit {
         this.attraction = attraction;
     }
 
+    // Убираем прямое поле visitTime, а вместо него делаем геттер
     public LocalDateTime getVisitTime() {
-        return visitTime;
-    }
-
-    public void setVisitTime(LocalDateTime visitTime) {
-        this.visitTime = visitTime;
+        return id != null ? id.getVisitTime() : null;
     }
 
     public Ticket getTicket() {
@@ -92,7 +89,7 @@ public class Visit {
                 "id=" + id +
                 ", user=" + user +
                 ", attraction=" + attraction +
-                ", visitTime=" + visitTime +
+                ", visitTime=" + getVisitTime() +
                 ", ticket=" + ticket +
                 '}';
     }

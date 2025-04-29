@@ -3,13 +3,18 @@ package org.example.entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class VisitId implements Serializable {
     private Long userId;
     private Long attractionId;
+
+    @Column(name = "visit_time")
     private LocalDateTime visitTime;
+
 
     public VisitId() {}
 
