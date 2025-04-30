@@ -26,6 +26,8 @@ dependencies {
     // Spring Boot зависимости
     implementation 'org.springframework.boot:spring-boot-starter-web' // Для веб-приложения
     testImplementation 'org.springframework.boot:spring-boot-starter-test' // Для тестирования
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 application {

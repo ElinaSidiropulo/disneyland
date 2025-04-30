@@ -47,33 +47,33 @@
 //}
 //
 //
-package org.example;
-
-import org.example.dao.UserDao;
-import org.example.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-
-    public static void main(String[] args) {
-        UserDao userDao = new UserDao();
-
-        try {
-            User user = new User();
-            user.setName("auffy");
-            user.setEmail("auffy@example.com");
-
-            userDao.saveUser(user);
-            logger.info("Пользователь успешно сохранен: {}", user);
-
-            userDao.getAllUsers().forEach(u -> logger.info("Найден пользователь: {}", u));
-        } catch (Exception e) {
-            logger.error("Ошибка в основном методе Main: ", e);
-        }
-    }
-}
+//package org.example;
+//
+//import org.example.dao.UserDao;
+//import org.example.entity.User;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+//
+//public class Main {
+//    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+//
+//    public static void main(String[] args) {
+//        UserDao userDao = new UserDao();
+//
+//        try {
+//            User user = new User();
+//            user.setName("auffy");
+//            user.setEmail("auffy@example.com");
+//
+//            userDao.saveUser(user);
+//            logger.info("Пользователь успешно сохранен: {}", user);
+//
+//            userDao.getAllUsers().forEach(u -> logger.info("Найден пользователь: {}", u));
+//        } catch (Exception e) {
+//            logger.error("Ошибка в основном методе Main: ", e);
+//        }
+//    }
+//}
 
 //package org.example;
 //
@@ -299,3 +299,15 @@ public class Main {
 //        System.out.println("Найденное расписание: " + retrievedSchedule);
 //    }
 //}
+
+package org.example;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class Main {
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+    }
+}

@@ -2,11 +2,10 @@ package org.example.controller;
 
 import org.example.dao.UserDao;
 import org.example.entity.User;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.example.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
@@ -14,15 +13,28 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    private final UserDao userDao = new UserDao();
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<User> getAllUsers() {
-        return userDao.getAllUsers();
+        return userService.getAllUsers();
     }
 
     @PostMapping
-    public void createUser(@RequestBody User user) {
-        userDao.saveUser(user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        userService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        User user = userService.getUserById(id);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
 }
+

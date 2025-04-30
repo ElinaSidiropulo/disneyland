@@ -1,6 +1,10 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,12 +15,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name is required")
     @Column(nullable = false, length = 100)
     private String name;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
+    @Pattern(
+            regexp = "^\\+?[0-9\\-\\s]{7,20}$",
+            message = "Phone number must be valid"
+    )
     @Column(length = 20)
     private String phone;
 
