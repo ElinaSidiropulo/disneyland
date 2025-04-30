@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.dao.UserDao;
+//import org.example.dao.UserDao;
 import org.example.entity.User;
 import org.example.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -34,6 +34,18 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+        User user = userService.updateUser(id, updatedUser);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        boolean deleted = userService.deleteUser(id);
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
 }
