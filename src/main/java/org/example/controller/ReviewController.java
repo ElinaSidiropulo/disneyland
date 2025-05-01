@@ -42,4 +42,16 @@ public class ReviewController {
     public List<Review> getReviewsByAttractionId(@PathVariable Long attractionId) {
         return reviewService.getReviewsByAttractionId(attractionId);
     }
+
+    @PutMapping("/{id}")
+    public Review updateReview(@PathVariable Long id, @RequestBody Review review) {
+        return reviewService.updateReview(id, review);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteReview(@PathVariable Long id) {
+        return reviewService.deleteReview(id);
+    }
+
+
 }
